@@ -20,7 +20,10 @@ def snippet_page(request, snipp_id:int):
     except ObjectDoesNotExist:
         return HttpResponse(f'<h2>Сниппета с id={snipp_id} не существует</h2>')
     else:
-        context = {"snippet": snippet}
+        context = {
+            'pagename': 'Просмотр сниппета',
+            'snippet': snippet
+            }
         return render(request, "pages/snippet.html", context)
 
 
