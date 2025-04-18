@@ -48,3 +48,7 @@ def snippets_page(request):
                }
     return render(request, 'pages/view_snippets.html', context)
 
+def snippet_delete(request, snipp_id:int):
+    snippet = Snippet.objects.get(id=snipp_id)
+    snippet.delete()
+    return redirect('snipp_list')

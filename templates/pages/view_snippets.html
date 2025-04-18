@@ -32,6 +32,7 @@
                         <td scope="row">{{ snippet.id }}</td>
                         <td><a href="{% url "snipp_info" snippet.id %}">{{snippet.name}}</a></td>
                         <td>{{snippet.creation_date | date:"Y-m-d H:i:s"}}</td>
+                        <td> <a href="{% url "snipp_delete" snippet.id %}"> Удалить сниппет</a> <td>
                     </tr>
                     {% endfor %}
 
