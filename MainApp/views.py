@@ -40,3 +40,9 @@ def snippets_page(request):
                }
     return render(request, 'pages/view_snippets.html', context)
 
+def snippet_create(request):
+    from pprint import pprint
+    if request.method == 'POST':
+        pprint(request.POST)
+        return HttpResponse('done')
+

@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col">
-                <form action="" method="post">
+                <form action="{% url "snipp_create" %}" method="post">
                     {% csrf_token %}
                     {% comment %} <div class="form-group row">
                         <div class="col-8">
