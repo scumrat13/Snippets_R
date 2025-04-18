@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from MainApp.models import Snippet
 from django.core.exceptions import ObjectDoesNotExist
 from MainApp.forms import SnippetForm
@@ -48,7 +48,13 @@ def snippets_page(request):
                }
     return render(request, 'pages/view_snippets.html', context)
 
+
 def snippet_delete(request, snipp_id:int):
-    snippet = Snippet.objects.get(id=snipp_id)
+    snippet = get_object_or_404(Snippet, id=snippet.id)
     snippet.delete()
     return redirect('snipp_list')
+
+def snippet_edit(requst, snipp_id:int):
+    snippet = Snippet.objects.get(id=snipp_id)
+
+    pass

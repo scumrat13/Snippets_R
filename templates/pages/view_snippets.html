@@ -24,6 +24,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Название</th>
                         <th scope="col">Дата создания</th>
+                        <th scope="col">Удалить</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,10 +33,13 @@
                         <td scope="row">{{ snippet.id }}</td>
                         <td><a href="{% url "snipp_info" snippet.id %}">{{snippet.name}}</a></td>
                         <td>{{snippet.creation_date | date:"Y-m-d H:i:s"}}</td>
-                        <td> <a href="{% url "snipp_delete" snippet.id %}"> Удалить сниппет</a> <td>
+                        <td><a href="{% url "snipp_delete" snippet.id  %}">Удалить сниппет</a></td>
+                        {% comment %} 
+                            ПЕРЕДЕЛАТЬ НА КНОПКУ С ТОКЕНОМ 
+                            15 ВИДЕО, БЛИЖЕ К КОНЦУ
+                        {% endcomment %}
                     </tr>
                     {% endfor %}
-
                     </tbody>
                 </table>
                 <div align="right">
