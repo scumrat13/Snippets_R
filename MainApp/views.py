@@ -24,7 +24,7 @@ def add_snippet_page(request):
         if form.is_valid():
             form.save()
             return redirect("snipp_list")
-        return render(request, "pages/add_snippets.html", {'form': form})
+        return render(request, "pages/add_snippet.html", {'form': form})
     
 
 def snippet_page(request, snipp_id:int):
