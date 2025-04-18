@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% block content %}
     <div class="container">
         <div class="row">
             <div class="col text-center">
@@ -12,7 +12,8 @@
         <div class="row">
             <div class="col">
                 <form action="" method="post">
-                    <div class="form-group row">
+                    {% csrf_token %}
+                    {% comment %} <div class="form-group row">
                         <div class="col-8">
                             <input type="text" name="name" class="form-control form-control-lg" placeholder="Название сниппета">
                         </div>
@@ -35,7 +36,11 @@
                         <div class="col-8">
                             <input type="submit" class="btn btn-primary btn-block" value="Сохранить">
                         </div>
-                    </div>
+                    </div> {% endcomment %}
+                    <table>
+                        {{ form }}
+                    </table>
+                    <input type="submit" value="Submit"/>
                 </form>
 
             </div>
