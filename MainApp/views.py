@@ -27,7 +27,7 @@ def add_snippet_page(request):
         return render(request, "pages/add_snippet.html", {'form': form})
     
 
-def snippet_page(request, snipp_id:int):
+def snippet_info(request, snipp_id:int):
     try:
         snippet = Snippet.objects.get(id=snipp_id)
     except ObjectDoesNotExist:
@@ -63,7 +63,7 @@ def snippet_edit(request, snipp_id:int):
     except ObjectDoesNotExist:
         return Http404
     
-    if request.method == "GET":
+    if request.method == "GET": # Попадаем сюда по клику Редактировать сниппет
         context = {
         'pagename': 'Редактирование сниппета',
         'snippet': snippet,
@@ -74,7 +74,6 @@ def snippet_edit(request, snipp_id:int):
     if request.method == "POST":
         data_form = request.POST
         snippet.name = data_form['name']
-        snippet.lang = data_form['lang']
         snippet.code = data_form['code']
         snippet.creation_date = data_form['creation_date']
         snippet.save()
