@@ -12,7 +12,7 @@ def index_page(request):
 
 
 def add_snippet_page(request):
-    if request.method == 'GET': # создание пустой формы при GET запросе. Такой будет, например, по лкм кнопки в хеддере
+    if request.method == 'GET': # создание пустой формы при GET запросе. Такой будет по лкм кнопки в хеддере
         form = SnippetForm()
         context = {
             'pagename': 'Добавление нового сниппета',
@@ -51,13 +51,13 @@ def snippets_page(request):
 
 
 def snippet_delete(request, snipp_id:int):
-    snippet = get_object_or_404(Snippet, id=snipp_id)
-    snippet.delete()
-    return redirect('snipp_list')
+    if request.method == "POST":
+        snippet = get_object_or_404(Snippet, id=snipp_id)
+        snippet.delete()
+        return redirect('snipp_list')
 
 
 def snippet_edit(request, snipp_id:int):
-    context = {'pagename': 'Редактирование сниппета'}
     try:
         snippet = Snippet.objects.get(id=snipp_id)
     except ObjectDoesNotExist:
@@ -67,7 +67,7 @@ def snippet_edit(request, snipp_id:int):
         context = {
         'pagename': 'Редактирование сниппета',
         'snippet': snippet,
-        'type': 'edit'
+        'type': 'edit',
         }
         return render(request, "pages/snippet.html", context)
     
