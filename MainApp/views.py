@@ -75,7 +75,7 @@ def snippet_edit(request, snipp_id:int):
         data_form = request.POST
         snippet.name = data_form['name']
         snippet.code = data_form['code']
-        snippet.creation_date = data_form['creation_date']
+        # snippet.creation_date = data_form['creation_date']
         snippet.save()
         return redirect('snipp_list')
     

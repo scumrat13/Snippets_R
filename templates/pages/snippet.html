@@ -38,9 +38,9 @@
                 <div class="col col-8">
                     Название: <input type="text" name="name" value="{{ snippet.name }}" class="form-control">
                 </div>
-                <div class="col col-4">
+                {% comment %} <div class="col col-4">
                     Дата создания:<input type="text" name="creation_date" value="{{ snippet.creation_date | date:"Y-m-d H:i:s" }}" class="form-control">
-                </div>
+                </div> {% endcomment %}
             </div>
             <hr>
             <div class="row">

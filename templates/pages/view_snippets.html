@@ -8,7 +8,6 @@
                 <hr>
             </div>
         </div>
-
         <div class="row">
             <div class="col">
                 <p>На данной страницы будут отображаться все созданные сниппеты.</p>
@@ -23,7 +22,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Название</th>
                         <th scope="col">Дата создания</th>
-                        <th scope="col">Удалить сниппет</th>
+                        <th scope="col">Удалить</th>
                         <th scope="col">Редактировать</th>
                     </tr>
                     </thead>
@@ -39,7 +38,11 @@
                                 <button type="submit" class="btn btn-danger"> Удалить </button>
                             </form>
                         </td>
-                        <td><a href="{% url "snipp_edit" snippet.id  %}">Редактировать</a></td>
+                        <td>
+                            <a href="{% url "snipp_edit" snippet.id  %}">
+                            <button type="button" class="btn btn-info">Редактировать</button>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %} 
                     </tbody>
