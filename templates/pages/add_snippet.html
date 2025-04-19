@@ -8,19 +8,20 @@
                 <hr>
             </div>
         </div>
-
         <div class="row">
             <div class="col">
-                <form action="" method="post">
+                <form action="" method="post"> 
+                    {% comment %} 
+                        action пустой, так как нам нужно отправлять заполненные данные на эту же страницу
+                    {% endcomment %}
                     {% csrf_token %}
                         {{ form.as_p }}
                     <div class="form_group_row">
                         <div class="col-6">
-                            <input type="submit" class="btn btn-primary brn-block"value="Создать сниппеточек"/>
+                            <input type="submit" class="btn btn-primary brn-block" value="Создать сниппеточек"/>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

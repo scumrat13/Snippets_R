@@ -15,7 +15,6 @@
                 <hr>
             </div>
         </div>
-
         <div class="row">
             <div class="col">
                 <table class="table table-striped">
@@ -25,6 +24,7 @@
                         <th scope="col">Название</th>
                         <th scope="col">Дата создания</th>
                         <th scope="col">Удалить</th>
+                        <th scope="col">Редактировать</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,17 +33,19 @@
                         <td scope="row">{{ snippet.id }}</td>
                         <td><a href="{% url "snipp_info" snippet.id %}">{{snippet.name}}</a></td>
                         <td>{{snippet.creation_date | date:"Y-m-d H:i:s"}}</td>
-                        <td><a href="{% url "snipp_delete" snippet.id  %}">Удалить сниппет</a></td>
+                        {% comment %} <td><a href="{% url "snipp_delete" snippet.id  %}">Удалить сниппет</a></td> {% endcomment %}
+                        <td><button type="submit" class="btn btn-primary brn-block" color="red"> Удалить сниппет</button>
                         {% comment %} 
                             ПЕРЕДЕЛАТЬ НА КНОПКУ С ТОКЕНОМ 
                             15 ВИДЕО, БЛИЖЕ К КОНЦУ
                         {% endcomment %}
+                        <td><a href="{% url "snipp_edit" snippet.id  %}">Редактировать</a></td>
                     </tr>
                     {% endfor %} 
                     </tbody>
                 </table>
                 <div align="right">
-                    <i style="color: gray;">Всего сниппетов: 2</i>
+                    <i style="color: gray;">Всего сниппетов: {{ snippets|length }}</i>
                 </div>
             </div>
         </div>

@@ -12,18 +12,18 @@ def index_page(request):
 
 
 def add_snippet_page(request):
-    if request.method == 'GET':
+    if request.method == 'GET': # создание пустой формы при GET запросе. Такой будет, например, по лкм кнопки в хеддере
         form = SnippetForm()
         context = {
             'pagename': 'Добавление нового сниппета',
             'form': form
             }
         return render(request, 'pages/add_snippet.html', context)
-    if request.method == 'POST':
+    if request.method == 'POST': # когда форма уже заполнена и лкм по кнопке создания
         form = SnippetForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("snipp_list")
+            return redirect("snipp_list") # редикрект работает как GET на snippets/list
         return render(request, "pages/add_snippet.html", {'form': form})
     
 
@@ -35,7 +35,8 @@ def snippet_page(request, snipp_id:int):
     else:
         context = {
             'pagename': 'Просмотр сниппета',
-            'snippet': snippet
+            'snippet': snippet,
+            'type': 'view'
             }
         return render(request, "pages/snippet.html", context)
 
@@ -50,11 +51,34 @@ def snippets_page(request):
 
 
 def snippet_delete(request, snipp_id:int):
-    snippet = get_object_or_404(Snippet, id=snippet.id)
+    snippet = get_object_or_404(Snippet, id=snipp_id)
     snippet.delete()
     return redirect('snipp_list')
 
-def snippet_edit(requst, snipp_id:int):
-    snippet = Snippet.objects.get(id=snipp_id)
 
-    pass
+def snippet_edit(request, snipp_id:int):
+    context = {'pagename': 'Редактирование сниппета'}
+    try:
+        snippet = Snippet.objects.get(id=snipp_id)
+    except ObjectDoesNotExist:
+        return Http404
+    
+    if request.method == "GET":
+        context = {
+        'pagename': 'Редактирование сниппета',
+        'snippet': snippet,
+        'type': 'edit'
+        }
+        return render(request, "pages/snippet.html", context)
+    
+    if request.method == "POST":
+        data_form = request.POST
+        snippet.name = data_form['name']
+        snippet.lang = data_form['lang']
+        snippet.code = data_form['code']
+        snippet.creation_date = data_form['creation_date']
+        snippet.save()
+        return redirect('snipp_list')
+    
+
+
