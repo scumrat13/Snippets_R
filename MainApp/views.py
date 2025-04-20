@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from MainApp.models import Snippet
 from django.core.exceptions import ObjectDoesNotExist
 from MainApp.forms import SnippetForm
+from django.contrib import auth
 
 
 def index_page(request):
@@ -22,7 +23,10 @@ def add_snippet_page(request):
     if request.method == 'POST': # когда форма уже заполнена и лкм по кнопке создания
         form = SnippetForm(request.POST)
         if form.is_valid():
-            form.save()
+            snippet = form.save(commit=False) # сохранение сниппета без добавления в базу
+            if request.user.is_authenticated:
+                snippet.user = request.user
+                snippet.save()
             return redirect("snipp_list") # редикрект работает как GET на snippets/list
         return render(request, "pages/add_snippet.html", {'form': form})
     
@@ -79,5 +83,18 @@ def snippet_edit(request, snipp_id:int):
         snippet.save()
         return redirect('snipp_list')
     
+def login(request):
+	if request.method == 'POST':
+		username = request.POST.get("username")
+		password = request.POST.get("password")
+		user = auth.authenticate(request, username=username, password=password)
+		if user is not None:
+			auth.login(request, user)
+		else:
+			# обработать ошибку
+			pass
+	return redirect('home')
 
-
+def logout(request):
+	auth.logout(request)
+	return redirect('home')

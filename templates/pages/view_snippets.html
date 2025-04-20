@@ -24,6 +24,7 @@
                         <th scope="col">Дата создания</th>
                         <th scope="col">Удалить</th>
                         <th scope="col">Редактировать</th>
+                        <th scope="col">Пользователь</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,9 @@
                             <a href="{% url "snipp_edit" snippet.id  %}">
                             <button type="button" class="btn btn-info">Редактировать</button>
                             </a>
+                        </td>
+                        <td>
+                            {{ snippet.user.username }} 
                         </td>
                     </tr>
                     {% endfor %} 
