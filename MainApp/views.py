@@ -46,7 +46,10 @@ def snippet_info(request, snipp_id:int):
 
 
 def snippets_page(request):
-    snippets = Snippet.objects.all()
+    if request.user.is_authenticated:
+         snippets = Snippet.objects.filter(user=request.user)
+    else:
+        snippets = Snippet.objects.all()
     context = {
         'pagename': 'Просмотр сниппетов',
         'snippets': snippets
