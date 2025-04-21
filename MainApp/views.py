@@ -14,12 +14,13 @@ def create_user(request):
         form = UserRegistrationForm()
         context['form'] = form
         return render(request, 'pages/registration.html', context)
+    
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
-        context['form']: form
+        context['form'] = form
         return render(request, 'pages/registration.html', context)
     
 
