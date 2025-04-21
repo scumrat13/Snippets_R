@@ -3,10 +3,25 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from MainApp.models import Snippet
 from django.core.exceptions import ObjectDoesNotExist
-from MainApp.forms import SnippetForm
+from MainApp.forms import SnippetForm, UserRegistrationForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
+
+def create_user(request):
+    context = {'pagename': 'Регистрация пользователя'}
+    if request.method == 'GET':
+        form = UserRegistrationForm()
+        context['form'] = form
+        return render(request, 'pages/registration.html', context)
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        context['form']: form
+        return render(request, 'pages/registration.html', context)
+    
 
 def index_page(request):
     context = {'pagename': 'PythonBin'}
@@ -31,8 +46,8 @@ def add_snippet_page(request):
                 snippet.save()
             return redirect("snipp_list") # редикрект работает как GET на snippets/list
         return render(request, "pages/add_snippet.html", {'form': form})
-    
 
+    
 def snippet_info(request, snipp_id:int):
     try:
         snippet = Snippet.objects.get(id=snipp_id)
