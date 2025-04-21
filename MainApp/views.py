@@ -47,7 +47,7 @@ def snippet_info(request, snipp_id:int):
 
 
 def snippets_page(request):
-    snippets = Snippet.objects.all()
+    snippets = Snippet.objects.filter(public=True)
     context = {
         'pagename': 'Просмотр сниппетов',
         'snippets': snippets
@@ -63,14 +63,14 @@ def my_snippets_page(request):
                }
     return render(request, 'pages/view_snippets.html', context)
 
-
+@login_required(login_url='home')
 def snippet_delete(request, snipp_id:int):
     if request.method == "POST":
         snippet = get_object_or_404(Snippet, id=snipp_id)
         snippet.delete()
         return redirect('snipp_list')
 
-
+@login_required(login_url='home')
 def snippet_edit(request, snipp_id:int):
     try:
         snippet = Snippet.objects.get(id=snipp_id)

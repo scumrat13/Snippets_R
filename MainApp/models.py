@@ -14,3 +14,8 @@ class Snippet(models.Model):
     creation_date = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=True, null=True)
     # blank и null позволяют сниппетам не иметь значений (или быть пустыми) у атрибута user
+    public = models.BooleanField(default=True)
+
+
+    def __repr__(self):
+        return f'Snippet{self.name}'

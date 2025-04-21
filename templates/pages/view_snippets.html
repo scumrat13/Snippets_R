@@ -25,6 +25,7 @@
                         <th scope="col">Удалить</th>
                         <th scope="col">Редактировать</th>
                         <th scope="col">Пользователь</th>
+                        <th scope="col">Тип</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,7 @@
                         <td scope="row">{{ snippet.id }}</td>
                         <td><a href="{% url "snipp_info" snippet.id %}">{{snippet.name}}</a></td>
                         <td>{{snippet.creation_date | date:"Y-m-d H:i:s"}}</td>
+                        {% if snippet.user %}{% endif %}
                         <td>
                             <form action={% url "snipp_delete" snippet.id %} method="post">
                                 {% csrf_token %}
@@ -47,6 +49,15 @@
                         <td>
                             {{ snippet.user.username }} 
                         </td>
+                        {% if snippet.public %}
+                        <td>
+                            Публичный
+                        </td>
+                        {% else %}
+                        <td>
+                            Приватный
+                        </td>
+                        {% endif %}
                     </tr>
                     {% endfor %} 
                     </tbody>
