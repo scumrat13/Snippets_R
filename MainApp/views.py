@@ -12,6 +12,7 @@ def index_page(request):
     context = {'pagename': 'PythonBin'}
     return render(request, 'pages/index.html', context)
 
+
 @login_required(login_url='home')
 def add_snippet_page(request):
     if request.method == 'GET': # создание пустой формы при GET запросе. Такой будет по лкм кнопки в хеддере
@@ -54,6 +55,7 @@ def snippets_page(request):
                }
     return render(request, 'pages/view_snippets.html', context)
 
+
 @login_required(login_url='home')
 def my_snippets_page(request):
     snippets = Snippet.objects.filter(user=request.user)
@@ -63,17 +65,19 @@ def my_snippets_page(request):
                }
     return render(request, 'pages/view_snippets.html', context)
 
+
 @login_required(login_url='home')
 def snippet_delete(request, snipp_id:int):
-    if request.method == "POST":
-        snippet = get_object_or_404(Snippet, id=snipp_id)
+    if request.method == "POST" or request.method == "GET":
+        snippet = get_object_or_404(Snippet.objects.filter(user=request.user), id=snipp_id)
         snippet.delete()
         return redirect('snipp_list')
+
 
 @login_required(login_url='home')
 def snippet_edit(request, snipp_id:int):
     try:
-        snippet = Snippet.objects.get(id=snipp_id)
+        snippet = Snippet.objects.filter(user=request.user).get(id=snipp_id)
     except ObjectDoesNotExist:
         return Http404
     
@@ -89,10 +93,12 @@ def snippet_edit(request, snipp_id:int):
         data_form = request.POST
         snippet.name = data_form['name']
         snippet.code = data_form['code']
+        snippet.public = data_form.get('public', False)
         # snippet.creation_date = data_form['creation_date']
         snippet.save()
         return redirect('snipp_list')
-    
+
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get("username")
@@ -105,6 +111,7 @@ def login(request):
             print(context)      
             return render(request, 'pages/index.html', context)
     return redirect('home')
+
 
 def logout(request):
 	auth.logout(request)

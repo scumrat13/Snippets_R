@@ -34,18 +34,29 @@
                         <td scope="row">{{ snippet.id }}</td>
                         <td><a href="{% url "snipp_info" snippet.id %}">{{snippet.name}}</a></td>
                         <td>{{snippet.creation_date | date:"Y-m-d H:i:s"}}</td>
-                        {% if snippet.user %}{% endif %}
+                        {% if snippet.user == request.user %}
                         <td>
                             <form action={% url "snipp_delete" snippet.id %} method="post">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger"> Удалить </button>
                             </form>
                         </td>
+                        {% else %}
+                        <td>
+                            <button type="submit" class="btn btn-secondary"> Удалить </button>
+                        </td>
+                        {% endif %}
+                        {% if snippet.user == request.user %}
                         <td>
                             <a href="{% url "snipp_edit" snippet.id  %}">
                             <button type="button" class="btn btn-info">Редактировать</button>
                             </a>
                         </td>
+                        {% else %}
+                        <td>
+                            <button type="submit" class="btn btn-secondary">Редактировать</button>
+                        </td>
+                        {% endif %}
                         <td>
                             {{ snippet.user.username }} 
                         </td>
