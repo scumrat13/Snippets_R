@@ -5,13 +5,14 @@ from MainApp.models import Snippet
 from django.core.exceptions import ObjectDoesNotExist
 from MainApp.forms import SnippetForm
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 
 def index_page(request):
     context = {'pagename': 'PythonBin'}
     return render(request, 'pages/index.html', context)
 
-
+@login_required(login_url='home')
 def add_snippet_page(request):
     if request.method == 'GET': # создание пустой формы при GET запросе. Такой будет по лкм кнопки в хеддере
         form = SnippetForm()
@@ -46,12 +47,18 @@ def snippet_info(request, snipp_id:int):
 
 
 def snippets_page(request):
-    if request.user.is_authenticated:
-         snippets = Snippet.objects.filter(user=request.user)
-    else:
-        snippets = Snippet.objects.all()
+    snippets = Snippet.objects.all()
     context = {
         'pagename': 'Просмотр сниппетов',
+        'snippets': snippets
+               }
+    return render(request, 'pages/view_snippets.html', context)
+
+@login_required(login_url='home')
+def my_snippets_page(request):
+    snippets = Snippet.objects.filter(user=request.user)
+    context = {
+        'pagename': 'Мои сниппеты',
         'snippets': snippets
                }
     return render(request, 'pages/view_snippets.html', context)
