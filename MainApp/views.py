@@ -87,16 +87,17 @@ def snippet_edit(request, snipp_id:int):
         return redirect('snipp_list')
     
 def login(request):
-	if request.method == 'POST':
-		username = request.POST.get("username")
-		password = request.POST.get("password")
-		user = auth.authenticate(request, username=username, password=password)
-		if user is not None:
-			auth.login(request, user)
-		else:
-			# обработать ошибку
-			pass
-	return redirect('home')
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        password = request.POST.get("password")     
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+        else:
+            context = {'pagename': 'PythonBin', 'errors': ['wrong username or password']}
+            print(context)      
+            return render(request, 'pages/index.html', context)
+    return redirect('home')
 
 def logout(request):
 	auth.logout(request)
