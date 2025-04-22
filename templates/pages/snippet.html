@@ -31,8 +31,31 @@
                 </div>
             </div>
         </fieldset>
+        <br>
+        <table border=1>
+            <tr>
+                <th> Автор </th>
+                <th> Комментарий </th>
+            </tr>
+            {% for comment in snippet.comments.all  %}
+            <tr>
+                <td> {{ comment.author.username }} </td>
+                <td> {{ comment.text }} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+            {% if request.user.is_authenticated %}
+            <form action="{% url "comment_add" %}" method="POST">
+                {% csrf_token %}
+                {{ comment_form }}
+                <input name="snipp_id" type="hidden" value = {{ snippet.id }}> <br>
+                <button type="submit"> Добавить </button>
+            </form>
+            {% endif %}
+        </table>
     {% else %}
-    <form action="" method="post"> 
+        <form action="" method="post"> 
         {% csrf_token %}
             <div class="row">
                 <div class="col col-8">
@@ -59,9 +82,17 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <form action="{% url 'comment_add' %}" method="POST">
+                    <textarea name="text">
+                        {{comment_form}}
+                    </textarea>
+                    <button type="submit">Добавить комментарий</button>
+                </form>
+            </div>
         <br>
             <button type="submit" class="btn btn-primary brn-block">Обновить</button>
-    </form>
+        </form>
     {% endif %}
     </div>
 </div>

@@ -1,5 +1,5 @@
 from django.forms import ModelForm, ValidationError, Textarea, TextInput
-from MainApp.models import Snippet
+from MainApp.models import Snippet, Comment
 from django.contrib.auth.models import User
 from django.forms import CharField, PasswordInput
 from django.core.exceptions import ValidationError
@@ -21,6 +21,15 @@ class SnippetForm(ModelForm):
         if len(snippet_name) > 3:
             return snippet_name
         raise ValidationError('Snippet name too short')
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        labels = {'text': ''}
+        widgets = {
+            'text': Textarea(attrs={'placeholder': 'Текст комментария'})
+        }
 
 
 class UserRegistrationForm(ModelForm):

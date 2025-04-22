@@ -8,6 +8,8 @@ LANGS = (
     ('cpp', 'C++')
 )
 class Snippet(models.Model):
+    class Meta:
+        ordering = ['name', 'lang']
     name = models.CharField(max_length=100)
     lang = models.CharField(max_length=30, choices=LANGS)
     code = models.TextField(max_length=5000)
@@ -16,6 +18,12 @@ class Snippet(models.Model):
     # blank и null позволяют сниппетам не иметь значений (или быть пустыми) у атрибута user
     public = models.BooleanField(default=True)
 
-
     def __repr__(self):
-        return f'Snippet{self.name}'
+        return f'Snippet({self.name}, {self.lang})'
+
+class Comment(models.Model):
+    text = models.TextField(max_length=1000)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    snippet = models.ForeignKey(to=Snippet, on_delete=models.CASCADE, related_name='comments')
+
