@@ -45,7 +45,7 @@
             {% endfor %}
         </table>
         <br>
-            {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated %}
             <form action="{% url "comment_add" %}" method="POST">
                 {% csrf_token %}
                 {{ comment_form }}
@@ -54,7 +54,7 @@
             </form>
             {% endif %}
         </table>
-    {% else %}
+        {% else %}
         <form action="" method="post"> 
         {% csrf_token %}
             <div class="row">
@@ -91,7 +91,7 @@
                 </form>
             </div>
         <br>
-            <button type="submit" class="btn btn-primary brn-block">Обновить</button>
+        <button type="submit" class="btn btn-primary brn-block">Обновить</button>
         </form>
     {% endif %}
     </div>
