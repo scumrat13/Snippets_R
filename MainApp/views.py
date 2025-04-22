@@ -97,10 +97,12 @@ def snippet_delete(request, snipp_id:int):
 @login_required(login_url='home')
 def snippet_edit(request, snipp_id:int):
     try:
-        snippet = Snippet.objects.filter(user=request.user).get(id=snipp_id)
+        # snippet = Snippet.objects.filter(user=request.user).get(id=snipp_id)
+        snippet = get_object_or_404(Snippet.objects.filter(user=request.user), id=snipp_id)
     except ObjectDoesNotExist:
         return Http404
     
+
     if request.method == "GET": # Попадаем сюда по клику Редактировать сниппет
         context = {
         'pagename': 'Редактирование сниппета',
