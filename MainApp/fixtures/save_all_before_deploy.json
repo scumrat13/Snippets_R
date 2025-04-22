@@ -1,0 +1,140 @@
+[
+{
+    "model": "MainApp.snippet",
+    "pk": 1,
+    "fields": {
+        "name": "3333Hello world Snippet Change111",
+        "lang": "py",
+        "code": "                                                                                                                print(\"Hello world\") change\r\n                        \r\n                        \r\n                        \r\n                        ",
+        "creation_date": "2025-04-21T17:04:42.674Z",
+        "user": null,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 2,
+    "fields": {
+        "name": "Change Hello world Snippet",
+        "lang": "js",
+        "code": "                                                        \r\nchanged 131313console.log(\"Hello world from Java Script\")\r\n                        \r\n                        ",
+        "creation_date": "2025-04-19T19:28:25.669Z",
+        "user": null,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 13,
+    "fields": {
+        "name": "3213123123cccc",
+        "lang": "jss",
+        "code": "                                                                                    3213123333\r\n                        \r\n                        \r\n                        ",
+        "creation_date": "2025-04-19T19:28:44.988Z",
+        "user": null,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 15,
+    "fields": {
+        "name": "eewdwedww31313",
+        "lang": "py",
+        "code": "                                                        fffqfqwf\r\n                        \r\n                        ",
+        "creation_date": "2025-04-19T19:28:36.540Z",
+        "user": null,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 16,
+    "fields": {
+        "name": "user_snipp",
+        "lang": "py",
+        "code": "                                                                                    user_snipp_code\r\n                        \r\n                        \r\n                        ",
+        "creation_date": "2025-04-21T16:53:57.991Z",
+        "user": 2,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 17,
+    "fields": {
+        "name": "11113333",
+        "lang": "py",
+        "code": "                                                                                                                11111\r\n                        \r\n                        \r\n                        \r\n                        ",
+        "creation_date": "2025-04-22T13:55:05.832Z",
+        "user": 1,
+        "public": false
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 18,
+    "fields": {
+        "name": "2222",
+        "lang": "html",
+        "code": "                                                                                                                22222\r\n                        \r\n                        \r\n                        \r\n                        ",
+        "creation_date": "2025-04-22T13:54:55.744Z",
+        "user": 1,
+        "public": false
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 19,
+    "fields": {
+        "name": "приватный",
+        "lang": "py",
+        "code": "                                                        аааа\r\n                        \r\n                        ",
+        "creation_date": "2025-04-21T17:01:27.313Z",
+        "user": 2,
+        "public": false
+    }
+},
+{
+    "model": "MainApp.snippet",
+    "pk": 20,
+    "fields": {
+        "name": "Admin's panel snippet",
+        "lang": "py",
+        "code": "print(privet)",
+        "creation_date": "2025-04-22T15:37:15.233Z",
+        "user": 1,
+        "public": true
+    }
+},
+{
+    "model": "MainApp.comment",
+    "pk": 1,
+    "fields": {
+        "text": "комментарий",
+        "creation_date": "2025-04-22T14:33:22.136Z",
+        "author": 2,
+        "snippet": 16
+    }
+},
+{
+    "model": "MainApp.comment",
+    "pk": 2,
+    "fields": {
+        "text": "комментарий2",
+        "creation_date": "2025-04-22T14:33:30.819Z",
+        "author": 2,
+        "snippet": 16
+    }
+},
+{
+    "model": "MainApp.comment",
+    "pk": 3,
+    "fields": {
+        "text": "комментарий от другого пользователя",
+        "creation_date": "2025-04-22T14:33:56.695Z",
+        "author": 1,
+        "snippet": 16
+    }
+}
+]
